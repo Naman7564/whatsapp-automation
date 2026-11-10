@@ -1,0 +1,27 @@
+{
+  "name": "whatsapp-automation-agent",
+  "version": "1.0.0",
+  "description": "WhatsApp automation agent with QR code scanning and auto-reply",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node --test arc.test.js dashboard.test.js",
+    "test:ui": "node --test dashboard.ui.test.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "automation",
+    "bot",
+    "auto-reply"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode-terminal": "^0.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

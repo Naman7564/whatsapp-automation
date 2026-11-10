@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Session data (contains authentication info - keep private!)
+session/
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+
+# Configuration with personal data
+config.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo

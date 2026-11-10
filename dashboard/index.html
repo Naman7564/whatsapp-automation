@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Manage ARC WhatsApp conversations, auto-reply access, and assistant instructions on your computer.">
+  <title>ARC | WhatsApp workspace</title>
+  <link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to workspace</a>
+  <aside class="navigation">
+    <a class="brand" href="#chats" aria-label="ARC home">ARC<span>WhatsApp workspace</span></a>
+    <button id="navigation-toggle" class="navigation-toggle" aria-expanded="false" aria-controls="workspace-navigation">Menu</button>
+    <nav id="workspace-navigation" aria-label="Workspace"><a href="#chats" data-tab="chats"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-2 2V11.5a9.5 9.5 0 0 1 19 0Z"/><path d="M7 9h10M7 13h6"/></svg><span>Conversations</span></a><a href="#numbers" data-tab="numbers"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 3 7v5c0 5 9 9 9 9s9-4 9-9V7Z"/><path d="m8 12 3 3 5-6"/></svg><span>Reply access</span></a><a href="#instructions" data-tab="instructions"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16M8 3v6M16 9v6M10 15v6"/></svg><span>ARC instructions</span></a></nav>
+    <div class="connection-area"><span class="connection" id="connection" role="status">Connecting…</span><span class="local-note">Local workspace</span></div>
+  </aside>
+  <main id="main" class="shell">
+    <div class="page-heading"><div><h1 id="page-title">Conversations</h1><p id="page-description">View recent WhatsApp chats.</p></div><div class="refresh-area"><button id="refresh"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 7a7 7 0 0 1 12-1l2 6M4 12l2 6a7 7 0 0 0 12-1"/></svg><span id="refresh-label">Refresh data</span></button><span id="updated">Waiting for data</span></div></div>
+    <p id="global-error" class="notice error" role="alert" hidden></p>
+    <p id="connection-notice" class="notice" hidden></p>
+    <noscript><p class="notice">Enable JavaScript to load your chats and manage ARC.</p></noscript>
+    <section id="chats-view" aria-label="Conversations">
+      <div class="inbox">
+        <aside class="chat-sidebar" aria-label="Chat list">
+          <div class="list-tools"><label for="chat-search">Find a conversation</label><input id="chat-search" type="search" placeholder="Name or number"></div>
+          <div id="chat-list" class="chat-list" aria-live="polite"><p class="empty">Loading your conversations…</p></div>
+          <p class="list-foot">Up to 200 recent personal chats. Groups are excluded.</p>
+        </aside>
+        <section class="conversation" aria-label="Selected conversation" tabindex="-1"><div id="conversation-head" class="conversation-head"><div class="contact-info"><h2>Open a conversation</h2><p>Select a chat to see recent messages and reply access.</p></div></div><div id="messages" class="messages" tabindex="0" aria-label="Message history"><div class="empty conversation-empty"><h2>No conversation selected</h2><p>Choose a chat from the list to read its recent messages.</p></div></div><div class="conversation-foot">Read-only chat. Reply in WhatsApp.</div></section>
+      </div>
+    </section>
+    <section id="numbers-view" aria-label="Reply access" hidden>
+      <div class="access-layout">
+        <div><div class="section-heading"><h2>Phone numbers</h2><span id="rule-count"></span></div><p class="muted">Only enabled numbers can receive auto-replies. All other numbers stay off.</p><div id="rules-list" class="rules-list"><p class="empty">Loading reply rules…</p></div></div>
+        <form id="rule-form" class="editor"><h2 id="rule-heading">Add a phone number</h2><label for="rule-number">Phone number with country code</label><input id="rule-number" type="tel" placeholder="+91 98765 43210" required maxlength="24"><label class="check"><input id="rule-enabled" type="checkbox">Allow automatic replies</label><label for="rule-reply">Fixed / fallback reply</label><textarea id="rule-reply" rows="5" maxlength="1200" required></textarea><p class="helper">Used when AI is off. If AI fails, nothing is sent.</p><button class="primary" type="submit">Save reply access</button><button id="new-rule" type="button">Clear form</button><p id="rule-result" class="helper" role="status"></p></form>
+      </div>
+    </section>
+    <section id="instructions-view" aria-label="ARC instructions" hidden>
+      <form id="settings-form" class="settings-layout">
+        <div><h2>How should ARC respond?</h2><p class="muted">Give ARC your tone, preferences, and context. Changes apply to new requests without a restart.</p><label for="instructions">Your instructions</label><textarea id="instructions" rows="14" maxlength="12000" placeholder="Keep replies brief and friendly. Ask a clarifying question when context is missing."></textarea><p class="helper">Owner preferences complement ARC’s built-in privacy and safety rules.</p><details><summary>View built-in instructions</summary><pre id="base-instructions"></pre></details></div>
+        <div class="editor"><h2>Reply behavior</h2><label class="check"><input id="ai-enabled" type="checkbox">Use ARC AI for enabled numbers</label><p class="helper">When off, enabled numbers receive their fixed reply.</p><label for="reply-delay">Reply delay (milliseconds)</label><input id="reply-delay" type="number" min="0" max="3600000" step="1" required><label for="cooldown">Per-chat cooldown (milliseconds)</label><input id="cooldown" type="number" min="0" max="3600000" step="1" required><p class="helper">Messages arriving during cooldown are skipped, not deferred.</p><button class="primary" type="submit">Save instructions</button><p id="settings-result" class="helper" role="status"></p></div>
+      </form>
+    </section>
+    <footer class="workspace-foot">Your API key never reaches this page.</footer>
+  </main>
+</body>
+</html>

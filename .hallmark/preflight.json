@@ -1,0 +1,13 @@
+{
+  "scanned": "2026-11-10",
+  "findings": {
+    "framework": "CommonJS Node app; package.json:5-9 and index.js:1-5",
+    "fonts": "No existing frontend",
+    "palette": "No existing frontend",
+    "material": "Real WhatsApp client and configuration; no invented chats, analytics or proof"
+  },
+  "preserve": ["WhatsApp client", "allowlist-only replies", "ARC built-in safety instructions"],
+  "introduce": ["local HTTP dashboard", "Coral app surfaces", "system font for offline operation", "per-number controls", "read-only chat viewer", "owner instructions"],
+  "inferred": { "audience": "local owner", "priority": "chats", "tone": "compact utilitarian" },
+  "scaffold": "Theme scaffold failed: coral.md has no header block; tokens created manually."
+}

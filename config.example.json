@@ -1,0 +1,24 @@
+{
+  "autoReplies": {
+    "example_rule_1": {
+      "number": "1234567890",
+      "enabled": false,
+      "reply": "Thanks for your message! I'll get back to you soon."
+    },
+    "example_rule_2": {
+      "number": "9876543210",
+      "enabled": false,
+      "reply": "I'm currently unavailable. I'll respond as soon as possible."
+    },
+    "example_rule_3": {
+      "number": "5555555555",
+      "enabled": false,
+      "reply": "Hello! This is an automated response. I'll reply to you shortly."
+    }
+  },
+  "settings": {
+    "defaultReply": "",
+    "replyDelay": 2000,
+    "logMessages": true
+  }
+}

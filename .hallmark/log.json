@@ -1,0 +1,13 @@
+[
+  {
+    "scope": "app",
+    "theme": "coral",
+    "shape": "app screen",
+    "nav": "workspace tabs",
+    "footer": "local privacy note",
+    "signature": "conversation and reply-access workbench",
+    "imagery": "none; live application data only",
+    "waived": ["System font for an offline local app"],
+    "prompt": "Manage WhatsApp reply access, view chats, and set ARC instructions"
+  }
+]

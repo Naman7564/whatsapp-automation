@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d31">
+  <meta name="description" content="Ace WhatsApp: manage personal conversations, control automatic reply access, and configure AI assistant instructions from your local workspace.">
+  <title>Ace WhatsApp: Replies on your terms</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="ace.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark ace-wordmark" href="/landing/" aria-label="Ace WhatsApp home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 26 16 5l11 21M10 19h12"/></svg>Ace<span>WhatsApp</span></a>
+    <nav aria-label="Main navigation"><a href="#features">Features</a><a href="#setup">How it works</a><a href="/">Open workspace</a></nav>
+    <a class="button small" href="/">Get Started</a>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy"><h1 id="hero-title">Your WhatsApp.<br>Replies on your terms.</h1><div class="hero-aside"><p>Choose who gets an automatic reply.<br>Give your assistant the instructions that matter.</p><a class="button" href="/">Get Started <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><span class="quiet">Open your local WhatsApp workspace</span></div></div>
+      <div class="playground" id="preview">
+        <div class="playground-bar"><span class="demo-title">A considered reply. Without the constant checking.</span><span class="preview-label">Illustrative conversation</span></div>
+        <div class="stage ace-stage">
+          <aside class="preview-context"><h2>A little help.<br>You’re still in control.</h2><p>Reply access is yours to give.<br>Unlisted and disabled contacts<br>never receive automatic replies.</p><a class="inline-link" href="/#numbers">Manage reply access <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></aside>
+          <div class="chat-preview"><div class="chat-preview-head"><span class="contact-avatar" aria-hidden="true">S</span><div><strong>Sam</strong><span>Example contact</span></div><span class="reply-pill">Reply access on</span></div><div class="preview-messages"><p class="sample-message incoming">Hey! Are you available to talk?</p><p class="sample-message outgoing" id="sample-reply">Thanks for reaching out. I’m away right now and will get back to you when I can.</p><span class="example-note">Example only. No messages are sent.</span></div><div class="reply-options" role="group" aria-label="Explore reply types"><button type="button" data-reply="fixed" aria-pressed="true">Fixed reply</button><button type="button" data-reply="ai" aria-pressed="false">AI instructions</button></div></div>
+        </div>
+        <div class="playground-footer"><p id="preview-description" role="status">Fixed replies use the message you set for each enabled contact.</p><a href="/#instructions">Configure your assistant</a></div>
+      </div>
+      <div class="under-demo"><span>Runs alongside your WhatsApp automation agent</span><span>Local workspace. Selective replies.</span></div>
+    </section>
+    <section class="principles wrap" id="features" aria-labelledby="features-title"><h2 id="features-title">Less busywork.<br>More say in every reply.</h2><div class="principle-list"><article><h3>The right contacts. Your permission.</h3><p>Enable automatic replies for specific numbers. Keep everyone else outside your assistant’s reply access.</p></article><article><h3>Your instructions, not a generic voice.</h3><p>Set owner preferences for AI replies, or turn AI off to use each enabled contact’s fixed response.</p></article><article><h3>Your conversations, in one place.</h3><p>Search personal chats, read recent messages, and review reply failures. The chat viewer is read-only.</p></article></div></section>
+    <section class="code-section" id="setup"><div class="wrap code-layout"><div><h2>Connect once.<br>Make the rules yours.</h2><p>Keep the agent running on your computer.<br>Manage the details from your workspace.</p><a class="inline-link" href="/">Open your workspace <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div><ol class="setup-list"><li><h3>Link your WhatsApp</h3><p>When prompted, scan the terminal QR code using WhatsApp’s Linked Devices. Sessions persist between restarts.</p></li><li><h3>Choose who gets a reply</h3><p>Add a number with its country code, set a fixed reply, and enable reply access.</p></li><li><h3>Set your assistant’s boundaries</h3><p>Configure AI instructions, reply delay, and per-chat cooldown. Saved changes apply to subsequent requests.</p></li></ol></div></section>
+    <section class="privacy wrap"><h2>Local access.<br>Clear boundaries.</h2><div><p>The workspace is served only on your computer. Credentials and session files are not exposed by the web server.</p><p>AI generation uses your configured model provider. “Local workspace” does not mean AI processing happens offline.</p><p class="quiet">This project uses WhatsApp Web automation, not the official WhatsApp Business Platform. Use it responsibly and follow WhatsApp’s terms. Ace is not affiliated with WhatsApp or Meta.</p></div></section>
+    <section class="closing wrap"><h2>Give your replies<br>a little breathing room.</h2><a class="button" href="/">Get Started <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></section>
+  </main>
+  <footer class="site-footer wrap"><a class="wordmark" href="/landing/">Ace</a><span>Your personal WhatsApp automation workspace.</span><a href="/">Open workspace</a></footer>
+</body>
+</html>
