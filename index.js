@@ -175,7 +175,13 @@ async function handleMessage(message) {
                 }
             }
             
-            // Never send fallback replies to unlisted contacts.
+            // Check if global auto-reply to all is enabled
+            if (!matchedRule && config.settings?.autoReplyToAll) {
+                replyText = config.settings.defaultReply || 'Thanks for your message! I\'ll get back to you soon.';
+                matchedRule = 'global_auto_reply';
+            }
+            
+            // Never send fallback replies to unlisted contacts unless global auto-reply is on.
             if (!matchedRule) return;
             if (busyChats.has(chatId)) return;
             if (Date.now() - (lastReplies.get(chatId) || 0) < (config.ai?.cooldownMs ?? 0)) {
@@ -191,7 +197,11 @@ async function handleMessage(message) {
                         const history = histories.get(chatId) || [];
                          if (config.ai?.enabled) replyText = await generateReply(message.body, history, config.ai.instructions || '');
                         await new Promise(resolve => setTimeout(resolve, config.settings.replyDelay ?? 2000));
-                         if (!config.autoReplies[matchedRule]?.enabled || String(config.autoReplies[matchedRule].number) !== String(contactNumber)) return;
+                          // Recheck the selected source after AI generation and delay: settings may have changed.
+                          if (matchedRule === 'global_auto_reply') {
+                              if (!config.settings?.autoReplyToAll) return;
+                          } else if (!config.autoReplies?.[matchedRule]?.enabled ||
+                              String(config.autoReplies[matchedRule].number) !== String(contactNumber)) return;
                          await message.reply(replyText);
                          runtime.failures.delete(String(contactNumber));
                         lastReplies.set(chatId, Date.now());

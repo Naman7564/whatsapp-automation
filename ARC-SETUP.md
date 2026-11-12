@@ -1,5 +1,11 @@
 # ARC replies
 
+## Shared instructions
+
+`SYSTEM_PROMPT` in `arc.js` is the single source for ARC's built-in instructions. Both contact-specific AI auto-replies and **Auto-reply to everyone** call the same `generateReply()` function, which includes those instructions and the saved owner preferences from the dashboard. The dashboard's **View built-in instructions** displays that same prompt; no manual copying is needed.
+
+Keep **Use ARC AI for replies** enabled to apply these instructions. When AI is off, replies are fixed text and do not interpret instructions. Saved owner preferences apply to new AI requests; changes to the built-in prompt in `arc.js` require a process restart (`npm run dev` restarts automatically).
+
 Requires Node.js 22+ and an OpenRouter API key. ARC defaults to OpenRouter with `openrouter/free`. Free routing is subject to provider availability and rate limits.
 
 1. Copy `.env.example` to `.env` and put your API key in `ARC_API_KEY`.

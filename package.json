@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "node --test arc.test.js dashboard.test.js",
+    "test": "node --test arc.test.js dashboard.test.js index.test.js",
     "test:ui": "node --test dashboard.ui.test.js"
   },
   "keywords": [

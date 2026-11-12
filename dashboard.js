@@ -62,6 +62,9 @@ async function getChatMessages(client, id) {
 function validateSettings(body) {
     if (typeof body.instructions !== 'string' || body.instructions.length > 12000) throw new Error('Instructions must be at most 12,000 characters.');
     if (typeof body.enabled !== 'boolean') throw new Error('Choose whether AI replies are enabled.');
+    if (typeof body.autoReplyToAll !== 'boolean') throw new Error('Choose whether auto-reply to all is enabled.');
+    if (body.autoReplyToAll && typeof body.defaultReply !== 'string') throw new Error('Default reply is required when auto-reply to all is enabled.');
+    if (body.autoReplyToAll && (!body.defaultReply.trim() || body.defaultReply.length > 1200)) throw new Error('Default reply must be between 1 and 1,200 characters.');
     for (const key of ['replyDelay', 'cooldownMs']) {
         if (!Number.isInteger(body[key]) || body[key] < 0 || body[key] > 3600000) throw new Error(`${key} must be between 0 and 3,600,000 milliseconds.`);
     }
@@ -100,7 +103,8 @@ function createDashboard({ client, getConfig, saveConfig, runtime, port = 3000 }
                 return send(200, { status: runtime.status, connectionError: runtime.connectionError,
                     rules: config.autoReplies || {}, failures: Object.fromEntries(runtime.failures),
                     settings: { enabled: !!config.ai?.enabled, instructions: config.ai?.instructions || '',
-                        replyDelay: config.settings?.replyDelay ?? 2000, cooldownMs: config.ai?.cooldownMs ?? 0 },
+                        replyDelay: config.settings?.replyDelay ?? 2000, cooldownMs: config.ai?.cooldownMs ?? 0,
+                        autoReplyToAll: !!config.settings?.autoReplyToAll, defaultReply: config.settings?.defaultReply || '' },
                     baseInstructions: SYSTEM_PROMPT });
             }
             if (req.method === 'GET' && url.pathname === '/api/chats') {
@@ -125,7 +129,7 @@ function createDashboard({ client, getConfig, saveConfig, runtime, port = 3000 }
                     if (url.pathname === '/api/settings') {
                         validateSettings(body);
                         config.ai = { ...config.ai, enabled: body.enabled, instructions: body.instructions, cooldownMs: body.cooldownMs };
-                        config.settings = { ...config.settings, replyDelay: body.replyDelay };
+                        config.settings = { ...config.settings, replyDelay: body.replyDelay, autoReplyToAll: body.autoReplyToAll, defaultReply: body.defaultReply };
                     } else {
                         const number = String(body.number || '').replace(/[\s+()-]/g, '');
                         if (!/^\d{7,15}$/.test(number)) throw new Error('Enter a phone number with country code, using 7 to 15 digits.');

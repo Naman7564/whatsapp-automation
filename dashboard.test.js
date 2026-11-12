@@ -80,9 +80,17 @@ test('local dashboard API with offline WhatsApp client', async t => {
         assert.equal((await post('/api/rules', { number: 'bad', enabled: true, reply: 'Hi' })).status, 400);
     });
     await t.test('validates and saves owner instructions without discarding existing configuration', async () => {
-        assert.equal((await post('/api/settings', { instructions: 'Be concise', enabled: true, replyDelay: 0, cooldownMs: 1000 })).status, 200);
+        assert.equal((await post('/api/settings', { instructions: 'Be concise', enabled: true, replyDelay: 0, cooldownMs: 1000, autoReplyToAll: true, defaultReply: 'Hello everyone' })).status, 200);
         assert.equal(config.ai.instructions, 'Be concise'); assert.equal(config.secret, 'never-expose');
-        assert.equal((await post('/api/settings', { instructions: '', enabled: true, replyDelay: -1, cooldownMs: 0 })).status, 400);
+        assert.equal(config.settings.autoReplyToAll, true);
+        const state = await (await fetch(base + '/api/state')).json();
+        assert.equal(state.settings.autoReplyToAll, true);
+        assert.equal(state.settings.defaultReply, 'Hello everyone');
+        const settings = { instructions: '', enabled: true, replyDelay: 0, cooldownMs: 0, autoReplyToAll: true, defaultReply: 'Hello' };
+        assert.equal((await post('/api/settings', { ...settings, replyDelay: -1 })).status, 400);
+        assert.equal((await post('/api/settings', { ...settings, defaultReply: '' })).status, 400);
+        assert.equal((await post('/api/settings', { ...settings, autoReplyToAll: false })).status, 200);
+        assert.equal(config.settings.autoReplyToAll, false);
     });
     await t.test('rejects foreign origins and host headers', async () => {
         assert.equal((await post('/api/settings', {}, { Origin: 'https://attacker.example' })).status, 403);

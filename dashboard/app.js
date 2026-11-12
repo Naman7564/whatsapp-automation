@@ -167,6 +167,7 @@ async function refresh() {
         if (!settingsLoaded) {
             $('instructions').value = state.settings.instructions; $('ai-enabled').checked = state.settings.enabled;
             $('reply-delay').value = state.settings.replyDelay; $('cooldown').value = state.settings.cooldownMs;
+            $('auto-reply-all').checked = state.settings.autoReplyToAll; $('default-reply').value = state.settings.defaultReply;
             $('base-instructions').textContent = state.baseInstructions; settingsLoaded = true;
         }
         renderRules();
@@ -188,7 +189,7 @@ async function submit(form, result, url, body) {
     finally { button.disabled = false; button.removeAttribute('aria-busy'); }
 }
 $('rule-form').onsubmit = e => { e.preventDefault(); submit(e.currentTarget, $('rule-result'), '/api/rules', { number: $('rule-number').value, enabled: $('rule-enabled').checked, reply: $('rule-reply').value }); };
-$('settings-form').onsubmit = e => { e.preventDefault(); submit(e.currentTarget, $('settings-result'), '/api/settings', { enabled: $('ai-enabled').checked, instructions: $('instructions').value, replyDelay: Number($('reply-delay').value), cooldownMs: Number($('cooldown').value) }); };
+$('settings-form').onsubmit = e => { e.preventDefault(); submit(e.currentTarget, $('settings-result'), '/api/settings', { enabled: $('ai-enabled').checked, instructions: $('instructions').value, replyDelay: Number($('reply-delay').value), cooldownMs: Number($('cooldown').value), autoReplyToAll: $('auto-reply-all').checked, defaultReply: $('default-reply').value }); };
 $('new-rule').onclick = () => editRule(''); $('refresh').onclick = refresh;
 $('chat-search').oninput = () => { inboxPreferences.query = $('chat-search').value; renderChats(); history.replaceState(null, '', '#chats?' + new URLSearchParams({ ...(selected ? { chat: selected } : {}), q: $('chat-search').value })); };
 $('navigation-toggle').onclick = () => {
